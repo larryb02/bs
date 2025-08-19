@@ -1,0 +1,21 @@
+services:
+  app:
+    image: imageName
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - 8080:8080
+
+  db:
+    image: postgres
+    shm_size: 128mb
+    volumes:
+      - postgres_data:/var/lib/data
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=example
+    ports:
+      - 5432:5432
+volumes:
+  postgres_data:
