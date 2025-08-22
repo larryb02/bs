@@ -1,0 +1,7 @@
+- name: Deploy Application
+  hosts: localhost
+
+  tasks:
+    - name: Say Hello
+      ansible.builtin.debug:
+        msg: "Hello World"
