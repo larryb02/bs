@@ -1,7 +1,8 @@
 - name: Deploy Application
   hosts: all
   become: true
-
+  
+  # NOTE: separate deployment from server configuration
   tasks:
     - name: Configure Host
       ansible.builtin.include_role:
@@ -10,7 +11,16 @@
     - name: Add compose file to host
       ansible.builtin.copy:
         src: ../../docker/compose.yml # no relative paths if possible
-        dest: /opt/compose.yml
+        dest: /opt/compose.yml # TODO: create a directory to store app related data in
         owner: fedora
         group: fedora
         mode: u=rw,g=r,o=r
+
+    - name: Start services
+      community.docker.docker_compose_v2:
+        project_src: /opt
+      register: output
+
+    - name: Show results
+      ansible.builtin.debug:
+        var: output
