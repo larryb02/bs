@@ -1,7 +1,8 @@
 - name: Deploy Application
-  hosts: localhost
+  hosts: all
+  become: true
 
   tasks:
-    - name: Say Hello
-      ansible.builtin.debug:
-        msg: "Hello World"
+    - name: Configure Host
+      ansible.builtin.include_role:
+        name: bootstrap_server
