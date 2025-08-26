@@ -6,3 +6,11 @@
     - name: Configure Host
       ansible.builtin.include_role:
         name: bootstrap_server
+
+    - name: Add compose file to host
+      ansible.builtin.copy:
+        src: ../../docker/compose.yml # no relative paths if possible
+        dest: /opt/compose.yml
+        owner: fedora
+        group: fedora
+        mode: u=rw,g=r,o=r
