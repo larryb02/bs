@@ -1,12 +1,12 @@
-- name: Deploy Application
+- name: Configure VM
   hosts: all
   become: true
-  
+
   # NOTE: separate deployment from server configuration
   tasks:
     - name: Configure Host
       ansible.builtin.include_role:
-        name: bootstrap_server
+        name: install_docker
 
     - name: Add compose file to host
       ansible.builtin.copy:
@@ -16,11 +16,12 @@
         group: fedora
         mode: u=rw,g=r,o=r
 
-    - name: Start services
-      community.docker.docker_compose_v2:
-        project_src: /opt
-      register: output
+    # TODO: move to separate playbook
+    # - name: Start Application Services
+    #   community.docker.docker_compose_v2:
+    #     project_src: /opt
+    #   register: output
 
-    - name: Show results
-      ansible.builtin.debug:
-        var: output
+    # - name: Show results
+    #   ansible.builtin.debug:
+    #     var: output

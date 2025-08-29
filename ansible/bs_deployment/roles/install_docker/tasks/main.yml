@@ -17,14 +17,13 @@
 
 - name: Install Docker
   ansible.builtin.dnf:
-    name:
-      - docker-ce
-      - docker-ce-cli
-      - containerd.io
-      - docker-buildx-plugin
-      - docker-compose-plugin
-    enablerepo:
-      - docker-ce-stable
+    name: "{{ item }}"
+  with_items:
+    - docker-ce
+    - docker-ce-cli
+    - containerd.io
+    - docker-buildx-plugin
+    - docker-compose-plugin
 
 # will eventually have a user dedicated to running application
 - name: Add User to Group
