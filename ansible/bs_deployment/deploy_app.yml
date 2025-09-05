@@ -1,1 +1,12 @@
 - name: Deploy Application
+  hosts: all
+
+  tasks:
+    - name: Start Application Services
+      community.docker.docker_compose_v2:
+        project_src: /opt/compose.yml
+      register: output
+
+    - name: Show results
+      ansible.builtin.debug:
+        var: output

@@ -2,6 +2,9 @@
   hosts: all
   become: true
 
+  vars:
+    compose_file: "../../docker/compose.example.yml"
+
   # NOTE: separate deployment from server configuration
   tasks:
     - name: Configure Host
@@ -10,18 +13,8 @@
 
     - name: Add compose file to host
       ansible.builtin.copy:
-        src: ../../docker/compose.yml # no relative paths if possible
-        dest: /opt/compose.yml # TODO: create a directory to store app related data in
+        src: "{{ compose_file }}" # no relative paths if possible
+        dest: /opt/compose.yml # TODO: create a directory/mount point to store app related data in
         owner: fedora
         group: fedora
         mode: u=rw,g=r,o=r
-
-    # TODO: move to separate playbook
-    # - name: Start Application Services
-    #   community.docker.docker_compose_v2:
-    #     project_src: /opt
-    #   register: output
-
-    # - name: Show results
-    #   ansible.builtin.debug:
-    #     var: output
