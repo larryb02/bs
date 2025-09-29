@@ -7,7 +7,7 @@ jobs:
     steps:
       - name: Provision Infra
         # run: echo "Hello Provisioning Infra with Terraform!"
-        run: ls /
+        run: ls /home/runner/work/bs
       # - uses: hashicorp/setup-terraform@v3
 
       # - id: init
