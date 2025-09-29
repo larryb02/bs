@@ -5,10 +5,11 @@ jobs:
   provision:
     runs-on: ubuntu-latest
     steps:
-      - name: Provision Infra
+      - name: Checkout repo
         # run: echo "Hello Provisioning Infra with Terraform!"
-        run: ls /home/runner/work/bs
-      # - uses: hashicorp/setup-terraform@v3
+        uses: actions/checkout@v5
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
 
       # - id: init
       #   run: cd ../terraform && terraform init
