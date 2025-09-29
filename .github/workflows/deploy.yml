@@ -10,7 +10,7 @@ jobs:
       - uses: hashicorp/setup-terraform@v3
 
       - id: init
-        run: terraform init
+        run: cd terraform && terraform init
 
       - run: echo ${{ steps.init.outputs.stdout }}
       - run: echo ${{ steps.init.outputs.sterr }}
