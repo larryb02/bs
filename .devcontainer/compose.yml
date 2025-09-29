@@ -1,7 +1,7 @@
 services:
   env:
-    # image: ghcr.io/larryb02/bs_env
-    image: bs_dev_env
+    image: ghcr.io/larryb02/bs_env
+    # image: bs_dev_env
     container_name: bs
     stdin_open: true
     tty: true
