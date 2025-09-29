@@ -13,10 +13,6 @@ jobs:
 
       - id: init
         run: cd ./terraform && terraform init
-
-      - run: echo ${{ steps.init.outputs.stdout }}
-      - run: echo ${{ steps.init.outputs.sterr }}
-      - run: echo ${{ steps.init.outputs.exitcode }}
   configure:
     runs-on: ubuntu-latest
     needs: provision
