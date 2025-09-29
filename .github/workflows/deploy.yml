@@ -6,15 +6,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Provision Infra
-        run: echo "Hello Provisioning Infra with Terraform!"
-      - uses: hashicorp/setup-terraform@v3
+        # run: echo "Hello Provisioning Infra with Terraform!"
+        run: ls
+      # - uses: hashicorp/setup-terraform@v3
 
-      - id: init
-        run: cd ../terraform && terraform init
+      # - id: init
+      #   run: cd ../terraform && terraform init
 
-      - run: echo ${{ steps.init.outputs.stdout }}
-      - run: echo ${{ steps.init.outputs.sterr }}
-      - run: echo ${{ steps.init.outputs.exitcode }}
+      # - run: echo ${{ steps.init.outputs.stdout }}
+      # - run: echo ${{ steps.init.outputs.sterr }}
+      # - run: echo ${{ steps.init.outputs.exitcode }}
   configure:
     runs-on: ubuntu-latest
     needs: provision
