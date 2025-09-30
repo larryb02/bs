@@ -1,0 +1,22 @@
+name: Setup Ansible
+description: Install Ansible on ubuntu
+# inputs:
+#   who-to-greet:  # id of input
+#     description: 'Who to greet'
+#     required: true
+#     default: 'World'
+# outputs:
+#   random-number:
+#     description: "Random number"
+#     value: ${{ steps.random-number-generator.outputs.random-number }}
+runs:
+  using: "composite"
+  steps:
+    - name: Install Ansible
+      run: |
+          sudo apt update \
+          && sudo apt install software-properties-common \
+          && sudo add-apt-repository --yes --update ppa:ansible/ansible \
+          && sudo apt install ansible -y
+      shell: bash
+
