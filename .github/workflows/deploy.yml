@@ -18,10 +18,10 @@ jobs:
   configure:
     runs-on: ubuntu-latest
     steps:
-      - name: Install Ansible
-        uses: ./.github/actions/setup-ansible
       - name: Checkout Repo
         uses: actions/checkout@v5
+      - name: Install Ansible
+        uses: ./.github/actions/setup-ansible
       - name: Bootstrap Server
         run: cd ./ansible/bs_deployment && ansible-playbook bootstrap_vm.yml -i $host_addr,
   deploy:
