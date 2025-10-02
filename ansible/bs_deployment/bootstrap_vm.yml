@@ -1,5 +1,5 @@
 - name: Configure VM
-  hosts: all
+  hosts: localhost
   become: true
 
   vars:
@@ -15,6 +15,6 @@
       ansible.builtin.copy:
         src: "{{ compose_file }}" # no relative paths if possible
         dest: /opt/compose.yml # TODO: create a directory/mount point to store app related data in
-        owner: fedora
-        group: fedora
+        # owner: fedora
+        # group: fedora
         mode: u=rw,g=r,o=r

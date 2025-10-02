@@ -1,40 +1,15 @@
 ---
-# tasks file for bootstrap_ec2
-- name: Upgrade all packages
-  ansible.builtin.dnf:
-    name: "*"
-    state: latest
 
-- name: Install Dnf Plugins Core
-  ansible.builtin.dnf:
-    name:
-      - dnf-plugins-core
+- name: Get Docker Convenience Script
+  ansible.builtin.get_url:
+    url: https://get.docker.com
+    dest: "./get-docker.sh"
+    mode: 744
 
-- name: Add Docker Repo # hack because dnf config manager module doesnt work with dnf5
-  ansible.builtin.command: >
-    dnf-3 config-manager --add-repo https://download.docker.com/linux/fedora/docker-ce.repo
-  become: true
+- name: Run Docker Install Script
+  ansible.builtin.command: sudo sh ./get-docker.sh --dry-run
 
-- name: Install Docker
-  ansible.builtin.dnf:
-    name: "{{ item }}"
-  with_items:
-    - docker-ce
-    - docker-ce-cli
-    - containerd.io
-    - docker-buildx-plugin
-    - docker-compose-plugin
-
-# will eventually have a user dedicated to running application
-- name: Add User to Group
-  ansible.builtin.user:
-    name: fedora
-    groups:
-      - docker
-    append: true
-
-- name: Start Docker Service
-  ansible.builtin.service:
-    name: docker
-    enabled: true
-    state: started
+- name: Cleanup
+  ansible.builtin.file:
+    name: "./get-docker.sh"
+    state: absent
